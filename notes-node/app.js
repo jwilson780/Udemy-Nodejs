@@ -2,8 +2,29 @@ const fs = require("fs");
 const notes = require("./notes");
 const _ = require("lodash");
 const yargs = require("yargs");
-
-const argv = yargs.argv;
+var titleObject = {
+  describe: "Title of note",
+  demand: true,
+  alias: "t"
+};
+var bodyObject = {
+  describe: "Body of note",
+  demand: true,
+  alias: "b"
+};
+const argv = yargs
+  .command("add", "Add a new note", {
+    title: titleObject,
+    body: bodyObject
+  })
+  .command("list", "List all notes")
+  .command("read", "Read a specific note", {
+    title: titleObject
+  })
+  .command("remove", "Remove a specific note", {
+    title: titleObject
+  })
+  .help().argv;
 var command = argv._[0];
 
 if (command === "add") {
