@@ -1,5 +1,3 @@
-console.log("Starting app.js");
-
 const fs = require("fs");
 const notes = require("./notes");
 const _ = require("lodash");
@@ -12,18 +10,31 @@ if (command === "add") {
   var note = notes.addNote(argv.title, argv.body);
   if (note) {
     console.log("Note added successfully!");
-    console.log("_______________________");
-    console.log(`Title: ${note.title}`);
-    console.log(`Body: ${note.body}`);
+    notes.logNote(note);
   } else {
     console.log("An error occoured!");
   }
 } else if (command === "list") {
-  notes.getAll();
+  var allNotes = notes.getAll();
+  console.log(`Printing ${allNotes.length} note(s)`);
+  allNotes.forEach(note => {
+    notes.logNote(note);
+  });
 } else if (command === "read") {
-  notes.readNote(argv.title);
+  var noteToRead = notes.readNote(argv.title);
+  if (noteToRead) {
+    console.log("Your Requested Note");
+    notes.logNote(noteToRead);
+  } else {
+    console.log("The requested note does not exist!");
+  }
 } else if (command === "remove") {
-  notes.removeNote(argv.title);
+  var isRemoved = notes.removeNote(argv.title);
+  if (isRemoved === true) {
+    console.log("Succesfully removed: ", argv.title);
+  } else {
+    console.log("That note does not exist");
+  }
 } else {
   console.log("Command not recognized");
 }
