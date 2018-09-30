@@ -24,15 +24,22 @@ request(
     json: true
   },
   (error, response, body) => {
-    //formatting address w/ template strings
-    console.log(
-      `Address is : ${body.results[0].locations[0].street}, ${
-        body.results[0].locations[0].adminArea5
-      }, ${body.results[0].locations[0].adminArea3}, ${
-        body.results[0].locations[0].adminArea1
-      }`
-    );
-    console.log(`Latitude is : ${body.results[0].locations[0].latLng.lat}`); // gets lat back for future api use
-    console.log(`Longitude is : ${body.results[0].locations[0].latLng.lng}`); // gets lng back for furture api use
+    if (error) {
+      console.log("Unable to connect to mapquest api server!");
+    } else if (body.results[0].locations[0].latLng.lat === 39.390897) {
+      //had to use above latitude value to prove not a place, mapquest doesn't return status like google api
+      console.log("That is not a place!");
+    } else {
+      //formatting address w/ template strings
+      console.log(
+        `Address is : ${body.results[0].locations[0].street}, ${
+          body.results[0].locations[0].adminArea5
+        }, ${body.results[0].locations[0].adminArea3}, ${
+          body.results[0].locations[0].adminArea1
+        }`
+      );
+      console.log(`Latitude is : ${body.results[0].locations[0].latLng.lat}`); // gets lat back for future api use
+      console.log(`Longitude is : ${body.results[0].locations[0].latLng.lng}`); // gets lng back for furture api use
+    }
   }
 );
