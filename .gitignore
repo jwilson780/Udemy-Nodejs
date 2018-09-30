@@ -75,3 +75,4 @@ typings/
 
 #key files
 weather-app/key.js
+weather-app/keys.js

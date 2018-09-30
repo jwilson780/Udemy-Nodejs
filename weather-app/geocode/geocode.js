@@ -1,4 +1,4 @@
-const key = require("../key");
+const key = require("../keys");
 const request = require("request");
 
 var geocodeAddress = (address, callback) => {
@@ -7,7 +7,7 @@ var geocodeAddress = (address, callback) => {
   request(
     {
       url: `http://www.mapquestapi.com/geocoding/v1/address?key=${
-        key.key
+        key.mapquestKey
       }&location=${encodedAddress}`,
       json: true
     },
