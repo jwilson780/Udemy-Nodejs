@@ -9,6 +9,18 @@ const argv = yargs
       demand: true,
       alias: "address",
       string: true
+    },
+    t: {
+      describe: 'Testing for multiple args',
+      demand: true,
+      alias: 'Test',
+      string: true
+    },
+    j: {
+      describe: 'Testing for multiple args number 2',
+      demand: true,
+      alias: 'Test2',
+      string: true
     }
   })
   .help()
