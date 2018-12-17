@@ -7,6 +7,7 @@ var { User } = require("./models/user");
 var { ObjectID } = require("mongodb");
 
 var app = express();
+const port = process.env.PORT || 3000; //heroku
 
 app.use(bodyParser.json());
 
@@ -56,8 +57,8 @@ app.get("/todos/:id", (req, res) => {
     .catch(e => res.status(400).send());
 });
 
-app.listen(3001, () => {
-  console.log("Started on port 3000");
+app.listen(port, () => {
+  console.log(`Started on ${port}`);
 });
 
 module.exports = { app };
